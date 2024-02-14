@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "vue": "^3.4.19",
+    "vue-loader": "^17.4.2",
+    "vue-template-compiler": "^2.7.16"
+  },
+  "devDependencies": {
+    "@symfony/webpack-encore": "^4.6.1"
+  }
+}
