@@ -1,25 +1,54 @@
 console.log("ok");
 import { Db } from "./Db.js";
 import { Pays } from "./Pays.js";
+import { GetPostApi } from "./GetPostAPI.js";
 
-const urlJson = "https://github.com/ARFP/arfp.github.io/blob/projets/machine-a-voter/docs/tp/web/backend/api-countries/countries.json";
+const urlJson = "https://raw.githubusercontent.com/ARFP/arfp.github.io/projets/machine-a-voter/docs/tp/web/backend/api-countries/countries.json";
 
 const app = {
     data() {
         return {
-            toto: "totototo"
+            statutPost: "En attente",
+            jsontmp: []
+
+
 
         }
     },
     async mounted() {
-        let json = await Db.fetchJson(urlJson);
-        for (let item of json) {
-            this.listeCandidats.push(new Candidat(item));
+
+        let collection = await GetPostApi.obtenirCollection('pays');
+        if (collection.length > 0) {
+            this.statutPost = "Base de donnée déjà remplie ! ";
+            return collection;
         }
-        this.listeRand = this.listeCandidats.sort((a, b) => 0.5 - Math.random());
+
+        let json = await Db.fetchJson(urlJson);
+        // this.jsontmp = JSON.parse(json);
+        let collectionPsh = [];
+
+        for (let item of json) {
+
+            let pays = new Pays(item);
+            let newPays = pays.nouveauPays();
+            let paysDb = await GetPostApi.postApi(newPays, 'pays');
+
+            collectionPsh.push(paysDb);
 
 
-        console.log(this.listeCandidats);
+        }
+
+        if (collectionPsh.length == json.length) {
+            this.statutPost = "Base de donnée a été remplie ! ";
+        }
+        else {
+            this.statutPost = " une erreur est survenue  ! ";
+        }
+        return collectionPsh;
+
+
+
+
     },
     computed: {
 

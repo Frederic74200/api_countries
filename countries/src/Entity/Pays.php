@@ -41,12 +41,12 @@ class Pays
     private ?int $id = null;
 
     #[ORM\Column(length: 2, unique: true, options: ["fixed" => true])]
-    #[SerializedName('conuntryCode')]
+    #[SerializedName('countryCode')]
     #[Groups('pays')]
     private ?string $country_code = null;
 
     #[ORM\Column(length: 255)]
-    #[SerializedName('conuntryName')]
+    #[SerializedName('countryName')]
     #[Groups('pays')]
     private ?string $country_name = null;
 
