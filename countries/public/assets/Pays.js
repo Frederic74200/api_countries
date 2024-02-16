@@ -9,8 +9,8 @@ class Pays {
     nouveauPays() {
 
         return {
-            countryCode: this.conuntryCode,
-            countryName: this.conuntryName
+            codePays: this.conuntryCode,
+            nomPays: this.conuntryName
         }
 
     }

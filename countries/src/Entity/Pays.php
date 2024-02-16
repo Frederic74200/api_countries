@@ -14,67 +14,60 @@ use ApiPlatform\Metadata\Delete;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 
-
-
 #[ORM\Entity(repositoryClass: PaysRepository::class)]
-#[
-    ApiResource(
-        normalizationContext: ['groups' => ['pays']],
-        shortName: "pays",
-        operations: [
-            new Get(uriTemplate: '/pays/{id}'),
-            new GetCollection(uriTemplate: '/pays'),
-            new Post(uriTemplate: '/pays'),
-            new Put(uriTemplate: '/pays/{id}'),
-            new Delete(uriTemplate: '/pays/{id}')
-        ]
-    )
-
-
-]
+#[ApiResource(
+    normalizationContext: ['groups' => ['pays']],
+    shortName: "pays",
+    operations: [
+        new Get(uriTemplate: '/pays/{id}'),
+        new GetCollection(uriTemplate: '/pays'),
+        new Post(uriTemplate: '/pays'),
+        new Put(uriTemplate: '/pays/{id}'),
+        new Delete(uriTemplate: '/pays/{id}')
+    ]
+)]
 class Pays
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups('pays')]
     private ?int $id = null;
 
     #[ORM\Column(length: 2, unique: true, options: ["fixed" => true])]
-    #[SerializedName('countryCode')]
+    #[SerializedName('codePays')]
     #[Groups('pays')]
-    private ?string $country_code = null;
+    private ?string $codePays = null;
 
     #[ORM\Column(length: 255)]
-    #[SerializedName('countryName')]
+    #[SerializedName('nomPays')]
     #[Groups('pays')]
-    private ?string $country_name = null;
+    private ?string $nomPays = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCountryCode(): ?string
+    public function getCodePays(): ?string
     {
-        return $this->country_code;
+        return $this->codePays;
     }
 
-    public function setCountryCode(string $country_code): static
+    public function setCodePays(string $codePays): static
     {
-        $this->country_code = $country_code;
+        $this->codePays = $codePays;
 
         return $this;
     }
 
-    public function getCountryName(): ?string
+    public function getNomPays(): ?string
     {
-        return $this->country_name;
+        return $this->nomPays;
     }
 
-    public function setCountryName(string $country_name): static
+    public function setNomPays(string $nomPays): static
     {
-        $this->country_name = $country_name;
+        $this->nomPays = $nomPays;
 
         return $this;
     }

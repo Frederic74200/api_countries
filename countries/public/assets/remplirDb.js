@@ -3,7 +3,7 @@ import { Db } from "./Db.js";
 import { Pays } from "./Pays.js";
 import { GetPostApi } from "./GetPostAPI.js";
 
-const urlJson = "https://raw.githubusercontent.com/ARFP/arfp.github.io/projets/machine-a-voter/docs/tp/web/backend/api-countries/countries.json";
+const urlJson = "https://arfp.github.io/tp/web/api/api-countries/countries.json";
 
 const app = {
     data() {
